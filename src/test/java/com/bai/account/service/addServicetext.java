@@ -12,16 +12,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 
 public class addServicetext {
-    private addService add;
+    private AddService add;
     @BeforeEach
     public void setup(){
-        add=new addService();
+        add=new AddService();
     }
     @Test
     void testAddMethod(){
         int num=100;
         assertEquals(101,add.addOne(100));
-        List<Integer> result=new ArrayList();
-        assertThat(result).isNotEmpty();
     }
 }
