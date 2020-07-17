@@ -11,7 +11,7 @@ import static org.assertj.core.api.InstanceOfAssertFactories.LIST;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 
-public class addServicetext {
+public class addServiceTest {
     private AddService add;
     @BeforeEach
     public void setup(){

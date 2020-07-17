@@ -37,16 +37,11 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>2.1.1</version>
         </dependency>
-        <!--Mysql driver-->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.15</version>
-        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
+        <!--Mysql driver-->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -126,6 +121,7 @@
                     </execution>
                 </executions>
             </plugin>
+            <!-- Jacoco plugin -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -139,22 +135,20 @@
                     </execution>
                     <execution>
                         <id>default-report</id>
-                        <phase>package</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
                     </execution>
                     <execution>
                         <id>default-check</id>
-
                         <goals>
                             <goal>check</goal>
                         </goals>
                         <configuration>
                             <excludes>
                                 <!-- Exclude class from test coverage -->
-                                <exclude>com/bai/accounting/shiro/*</exclude>
-                                <exclude>com/bai/accounting/config/*</exclude>
+                                <exclude>com/hardcore/accounting/shiro/*</exclude>
+                                <exclude>com/hardcore/accounting/config/*</exclude>
                             </excludes>
                             <rules>
                                 <rule>
@@ -163,7 +157,7 @@
                                         <limit>
                                             <counter>COMPLEXITY</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.90</minimum>
+                                            <minimum>0.60</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
@@ -172,6 +166,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
