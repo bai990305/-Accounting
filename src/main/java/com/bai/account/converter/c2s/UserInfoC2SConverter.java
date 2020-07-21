@@ -25,6 +25,7 @@ public class UserInfoC2SConverter extends Converter<UserInfo, com.bai.account.mo
         return UserInfo.builder()
                         .id(userInfo.getId())
                         .username(userInfo.getUsername())
+                        .password(userInfo.getPassword())
                         .build();
     }
 }

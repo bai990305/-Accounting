@@ -9,4 +9,6 @@ public interface UserInfoDao {
     UserInfo findUserInfoById(Long id);
 
     UserInfo findUserInfoByUserName(String username);
+
+    void createNewUser(UserInfo userInfo);
 }

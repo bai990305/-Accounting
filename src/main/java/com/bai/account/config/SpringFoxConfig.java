@@ -11,6 +11,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2
+//SWAGGER_2 自动生成Api文档配置
 public class SpringFoxConfig {
 
     /**
