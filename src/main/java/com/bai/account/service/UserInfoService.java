@@ -11,4 +11,5 @@ public interface UserInfoService {
     void login(String username, String password);
 
     UserInfo register(String username, String password);
+
 }

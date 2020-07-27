@@ -1,12 +1,15 @@
 package com.bai.account.controller;
 
 import com.bai.account.converter.c2s.UserInfoC2SConverter;
+import com.bai.account.exception.InvalidParameterException;
 import com.bai.account.model.service.UserInfo;
 import com.bai.account.service.UserInfoService;
 
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,5 +39,21 @@ public class UserController {
         UserInfo user = userInfoC2SConverter.convert(userInfoReturn);
         assert user != null;
         return ResponseEntity.ok(user);
+    }
+
+    /**
+     * f根据id查找.
+     * @param id 用户id.
+     * @return 查找到的userInfo
+     */
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<UserInfo> findUserById(@PathVariable("id")Long id) {
+        if (id <= 0L) {
+            throw new InvalidParameterException(String.format("The user id %s is invalid", id));
+        }
+        val userInfo = service.findUserInfoById(id);
+        val userInfoToReturn = userInfoC2SConverter.convert(userInfo);
+        assert userInfoToReturn != null;
+        return ResponseEntity.ok(userInfoToReturn);
     }
 }

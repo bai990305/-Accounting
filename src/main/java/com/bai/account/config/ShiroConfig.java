@@ -1,5 +1,9 @@
 package com.bai.account.config;
 
+import com.bai.account.shiro.CustomFormAuthenticationFilter;
+import com.bai.account.shiro.CustomHttpFilter;
+import com.bai.account.shiro.CustomShiroFilterFactoryBean;
+
 import lombok.val;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
@@ -12,6 +16,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.LinkedHashMap;
+
 
 
 @Configuration
@@ -42,14 +47,16 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilterFactoryBean(
         SecurityManager securityManager) {
 
-        val shiroFilterFactoryBean = new ShiroFilterFactoryBean();
+        val shiroFilterFactoryBean = new CustomShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         val filters = shiroFilterFactoryBean.getFilters();
+        filters.put("custom", new CustomHttpFilter());
+        filters.put("authc", new CustomFormAuthenticationFilter());
         val shiroFilterDefinitionMap = new LinkedHashMap<String, String>();
         shiroFilterDefinitionMap.put("/v1.0/session", "anon");
-        shiroFilterDefinitionMap.put("/v1.0/user", "anon");
-        shiroFilterDefinitionMap.put("/v1.0/tags/**", "anon");
+        shiroFilterDefinitionMap.put("/v1.0/tag/**", "anon");
         shiroFilterDefinitionMap.put("/v1.0/records/**", "anon");
+        shiroFilterDefinitionMap.put("/v1.0/user/**::POST", "custom");
 
         //swagger related url.
         shiroFilterDefinitionMap.put("/swagger-ui.html/**", "anon");

@@ -1,6 +1,7 @@
 package com.bai.account.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
@@ -66,5 +67,24 @@ public class UserInfoDaoTest {
             //Assert
             assertEquals(result,userInfo);
             verify(mapper).findUserInfoByUserName(username);
+        }
+        @Test
+        void testCreateNewUser(){
+            //Arrange
+            val id = 100L;
+            val username = "bai";
+            val password = "bai";
+            val createTime = LocalDateTime.now();
+            val userInfo = UserInfo.builder()
+                .id(id)
+                .username(username)
+                .password(password)
+                .createTime(createTime)
+                .build();
+            doReturn(1).when(mapper).createNewUser(userInfo);
+            //Act
+            dao.createNewUser(userInfo);
+            //Assert
+            verify(mapper).createNewUser(any(UserInfo.class));
         }
 }
