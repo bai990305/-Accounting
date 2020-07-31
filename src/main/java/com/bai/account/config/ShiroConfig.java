@@ -55,7 +55,7 @@ public class ShiroConfig {
         val shiroFilterDefinitionMap = new LinkedHashMap<String, String>();
         shiroFilterDefinitionMap.put("/v1.0/session", "anon");
         shiroFilterDefinitionMap.put("/v1.0/tag/**", "anon");
-        shiroFilterDefinitionMap.put("/v1.0/records/**", "anon");
+        shiroFilterDefinitionMap.put("/v1.0/record/**", "anon");
         shiroFilterDefinitionMap.put("/v1.0/user/**::POST", "custom");
 
         //swagger related url.

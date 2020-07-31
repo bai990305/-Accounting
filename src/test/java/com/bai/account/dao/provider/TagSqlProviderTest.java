@@ -32,4 +32,19 @@ public class TagSqlProviderTest {
             + "WHERE (id = #{id})";
         assertEquals(expectedSql, result);
     }
+
+    @Test
+    void testSelectTagSql(){
+        // Arrange
+        val tagIdList = ImmutableList.of(1L, 10L, 20L, 30L);
+
+        // Act
+        val result = tagSqlProvider.selectTag(tagIdList);
+        // Assert
+        String expectedSql = "SELECT id, description, user_id, status\n"
+            + "FROM hcas_tag\n"
+            + "WHERE (id in ('1','10','20','30'))";
+
+        assertEquals(expectedSql, result);
+    }
 }

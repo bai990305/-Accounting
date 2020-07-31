@@ -6,10 +6,14 @@ import com.bai.account.model.persistence.Tag;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.apache.ibatis.annotations.UpdateProvider;
+
+import java.util.List;
 
 @Mapper
 public interface TagMapper {
@@ -40,4 +44,12 @@ public interface TagMapper {
     @UpdateProvider(value = TagSqlProvider.class,method = "updateTag")
     @Options(resultSets = "id, description, user_id, status, create_time, update_time")
     void updateTag(Tag updateTag);
+    @SelectProvider(value = TagSqlProvider.class,method = "selectTag")
+    @Results({
+        @Result(column = "id", property = "id"),
+        @Result(column = "description", property = "description"),
+        @Result(column = "user_id", property = "userId"),
+        @Result(column = "status", property = "status")
+    })
+    List<Tag> findTagListById(@Param("id")List<Long> tagIds);
 }
